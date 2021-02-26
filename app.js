@@ -34,9 +34,13 @@ app.use(methodOverride("_method"));
 app.use(
   session({
     secret: "keyboard cat",
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 },
+    rolling: true, // <-- Set `rolling` to `true`
+    cookie: {
+      httpOnly: true,
+      maxAge: 1 * 60 * 60 * 1000,
+    },
   })
 );
 app.use(flash());
